@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<emps>
+    <emp>
+        <name>金毛狮王</name>
+        <age>55</age>
+        <image>https://web-framework.oss-cn-hangzhou.aliyuncs.com/web/1.jpg</image>
+        <gender>1</gender>
+        <job>1</job>
+    </emp>
+</emps>

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: demo
+  datasource:  # 配置mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/bugms
+    username: root
+    password: 050816
+    
+server:
+  port: 8080  # 默认端口
+  
+mybatis:
+  mapper-locations: classpath:mapper/*.xml 
