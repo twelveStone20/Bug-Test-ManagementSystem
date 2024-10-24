@@ -26,7 +26,7 @@ public class LoginController {
     @PostMapping("/register")
     public Result register(@RequestBody RegisterRequirement request) {
         User u = userService.register(request);
-        return u!=null?Result.success():Result.error("输入错误");
+        return u!=null?Result.success(u):Result.error("输入错误");
     }
     
     @PostMapping("/login")

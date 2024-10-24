@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -27,4 +28,7 @@ public interface ProjectMapper {
     })
     @Select("Select * from tb_project where manager_id = #{id}")
     public List<Project> allProject(int id);
+
+    @Delete("delete from tb_project where project_id = #{projectId}")
+    public void deleteProject(int projectId);
 }

@@ -38,4 +38,12 @@ public class ProjectServiceImpl implements ProjectService{
         List<Project> projectList=projectMapper.allProject(id);
         return projectList;
     }
+
+    @Override
+    public void deleteProject(int projectId) {
+        projectMapper.deleteProject(projectId);
+        return;
+    }
+
+    
 }

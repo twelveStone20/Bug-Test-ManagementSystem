@@ -7,4 +7,5 @@ import com.example.demo.pojo.project.addproject.AddProjectRequirement;
 public interface ProjectService {
     public Project addProject(AddProjectRequirement request);
     public List<Project> allProject(int id);
+    public void deleteProject(int projectId);
 }

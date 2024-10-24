@@ -9,7 +9,6 @@ public class Project {
     private int managerId;
     private String managerName;
     private int priority;
-    
     private int projectStatus;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;

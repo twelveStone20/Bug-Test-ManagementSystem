@@ -32,6 +32,9 @@ public interface UserMapper {
     @Select("select * from tb_userlogin where username = #{username} and password = #{password}")
     public User getByUsernameAndPassword(User oneUser);
 
+    @Select("select user_id from tb_userlogin where username = #{username} and password = #{password}")
+    public int getUserId(User oneUser);
+
     @Select("select * from tb_userlogin where user_id = #{id}")
     public User getByUserId(Integer id);
 
