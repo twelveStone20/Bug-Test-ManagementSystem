@@ -83,7 +83,7 @@ const handleCommand = async (key) => {
             <el-menu-item index="/test/testcaselibrary">用例库</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
-        <el-menu-item>
+        <el-menu-item index="/bug/buginfo">
           <el-icon><Tickets /></el-icon>
           <span>Bug管理</span>
         </el-menu-item>

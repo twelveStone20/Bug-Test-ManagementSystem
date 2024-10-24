@@ -12,6 +12,7 @@ testInstance.interceptors.request.use(
     const useStore = useUserStore()
     if (useStore.token) {
       config.headers.Authorization = useStore.token //请求头
+      console.log(config.headers.Authorization)
     }
     return config
   },

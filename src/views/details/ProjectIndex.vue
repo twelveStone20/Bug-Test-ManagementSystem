@@ -3,8 +3,11 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
+import { useUserStore } from '@/stores'
 const selectedValue = ref('')
 const router = useRouter()
+const userStore = useUserStore()
+userStore.getUser()
 const goTOProjectModules = () => {
   router.push('/project/oneproject/modules')
 }
@@ -27,10 +30,11 @@ const goTOProjectModules = () => {
           <el-form :inline="true" label-width="auto">
             <el-form-item label="项目负责人：">
               <el-input
+                v-model="userStore.user.username"
                 style="width: 200px"
-                placeholder="请填入项目负责人"
                 show-word-limit
                 type="text"
+                disabled
               />
             </el-form-item>
             <el-form-item label="项目状态：" style="width: 55%">

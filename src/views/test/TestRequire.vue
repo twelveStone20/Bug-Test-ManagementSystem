@@ -62,7 +62,7 @@ const handleClick = (tab, event) => {
   </el-card>
 </template>
 
-<style>
+<style scoped>
 .projectPage {
   min-height: 100%;
   box-sizing: border-box;

@@ -64,12 +64,6 @@ const tableData = [
           disabled
         />
       </el-form-item>
-      <el-form-item label="职业">
-        <el-select v-model="userForm.job">
-          <el-option label="学生" value="shanghai" />
-          <el-option label="程序猿" value="beijing" />
-        </el-select>
-      </el-form-item>
     </el-form>
     <el-table :data="tableData" stripe style="width: 100%" title="项目职位信息">
       <el-table-column prop="date" label="加入项目" width="180" />

@@ -1,8 +1,8 @@
 <script setup>
-import { addProjectService, getAllProjectService } from '@/api/project'
+import { addProjectService, deleteProjectService, getAllProjectService } from '@/api/project'
 import { useUserStore } from '@/stores'
-import { Edit } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { Edit, Delete } from '@element-plus/icons-vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 //import { TabsPaneContext } from 'element-plus'
 import { useRouter } from 'vue-router'
@@ -10,12 +10,14 @@ import { useRouter } from 'vue-router'
 const router = useRouter() //路由
 const userStore = useUserStore() //用户信息
 userStore.getUser()
-
+const user = userStore.user
+console.log(user)
 const activetab = ref('all') //激活标签页
 let tableData = ref([]) //表格数据
 const goToOneProject = () => {
   router.push(`/project/oneproject`)
 }
+
 const handleClick = (tab, event) => {
   console.log(tab, event)
 }
@@ -27,6 +29,17 @@ const getProjectList = async (managerId) => {
 getProjectList(userStore.user.userId)
 
 const statusValue = ref('0')
+//删除项目
+const deleteProject = async (projectId) => {
+  await ElMessageBox.confirm('你确定要删除该项目吗', '提示', {
+    type: 'warning',
+    confirmButtonText: '确认',
+    cancelButtonText: '取消'
+  })
+  await deleteProjectService(projectId)
+  ElMessage.success('删除成功')
+}
+
 //新建项目
 const addProjectFormVisible = ref(false)
 const addProjectFormRef = ref()
@@ -49,27 +62,35 @@ const addProject = async () => {
       <span><strong>项目全览</strong></span>
       <div class="extra">
         <el-button type="primary" @click="addProjectFormVisible = true">新建项目</el-button>
-        <el-button type="primary" @click="getProjectList">项目</el-button>
       </div>
     </div>
     <!-- 项目全览 -->
     <el-tabs v-model="activetab" class="demo-tabs" @tab-click="handleClick">
       <el-tab-pane label="全部项目" name="all">
         <el-table :data="tableData" stripe style="width: 100%">
-          <el-table-column type="index" prop="projectID" label="序号" width="100" />
+          <el-table-column type="index" label="序号" width="70" />
+          <el-table-column v-if="false" prop="projectId" label="项目ID" width="100" />
           <el-table-column prop="projectName" label="项目名称" width="180" />
           <el-table-column prop="managerName" label="项目负责人" width="150" />
-          <el-table-column prop="priority" label="项目优先级" width="150" />
+          <el-table-column prop="priority" label="项目优先级" width="100" />
           <el-table-column prop="projectStatus" label="项目状态" width="250">
-            <el-select v-model="statusValue" width="150">
+            <el-select v-model="statusValue" style="width: 200px" disabled>
               <el-option label="未开始" value="0" />
               <el-option label="进行中" value="1" />
               <el-option label="已完成" value="2" />
             </el-select>
           </el-table-column>
           <el-table-column prop="updateTime" label="最近更新时间" />
-          <el-table-column label="操作/查看" width="150">
-            <el-button type="primary" :icon="Edit" circle @click="goToOneProject" />
+          <el-table-column label="编辑/删除" width="150">
+            <template #default="scope">
+              <el-button type="primary" :icon="Edit" circle @click="goToOneProject" />
+              <el-button
+                type="primary"
+                :icon="Delete"
+                circle
+                @click="deleteProject(scope.row.projectId)"
+              ></el-button>
+            </template>
           </el-table-column>
         </el-table>
       </el-tab-pane>

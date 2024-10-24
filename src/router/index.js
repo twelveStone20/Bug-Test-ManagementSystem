@@ -70,6 +70,10 @@ const router = createRouter({
           component: () => import('@/views/details/TestCase.vue')
         },
         {
+          path: '/bug/buginfo',
+          component: () => import('@/views/bug/BugOneInfo.vue')
+        },
+        {
           path: '/configurationcenter',
           component: () => import('@/views/configuration/ConfigurationCenter.vue')
         },

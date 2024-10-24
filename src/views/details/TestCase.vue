@@ -6,8 +6,13 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const activeName = ref('CaseExecute')
 const activeNames = ref(['condition'])
-const resultStateButtonValue = ref(true)
+const resultStateButtonValue1 = ref(true)
+const resultStateButtonValue2 = ref(true)
+const resultStateButtonValue3 = ref(true)
+const resultStateButtonValue4 = ref(true)
 const textarea = ref('')
+const statusValue1 = ref('0')
+const statusValue2 = ref('0')
 const backToTestModule = () => {
   router.push(`/test/testplanonemodule`)
 }
@@ -36,12 +41,29 @@ const handleChange = (val) => {
           <div class="testcase-content">
             <div class="casename" style="display: flex; justify-content: space-between">
               <span>测试用例1</span>
-              <el-button type="primary">编辑用例信息</el-button>
+              <el-button type="primary">保存用例信息</el-button>
             </div>
             <div class="caseinfo">
               <el-descriptions :column="2" size="smaller" class="mt-4">
-                <el-descriptions-item label="优先级："> P0 </el-descriptions-item>
-                <el-descriptions-item label="用例类型：">功能测试</el-descriptions-item>
+                <el-descriptions-item label="优先级：">
+                  <el-select v-model="statusValue1" style="width: 200px">
+                    <el-option label="P0" value="0" />
+                    <el-option label="P1" value="1" />
+                    <el-option label="P2" value="3" />
+                    <el-option label="P3" value="4" />
+                    <el-option label="P4" value="5" />
+                  </el-select>
+                </el-descriptions-item>
+                <el-descriptions-item label="用例类型：">
+                  <el-select v-model="statusValue2" style="width: 200px">
+                    <el-option label="功能测试" value="0" />
+                    <el-option label="性能测试" value="1" />
+                    <el-option label="接口测试" value="3" />
+                    <el-option label="配置相关" value="4" />
+                    <el-option label="安全相关" value="5" />
+                    <el-option label="其他" value="5" />
+                  </el-select>
+                </el-descriptions-item>
                 <el-descriptions-item label="维护人：">zihang001</el-descriptions-item>
                 <el-descriptions-item label="创建时间：">2024-09-02</el-descriptions-item>
                 <el-descriptions-item label="执行人：">zihang001</el-descriptions-item>
@@ -85,28 +107,28 @@ const handleChange = (val) => {
             <span>执行结果</span>
           </div>
           <el-switch
-            v-model="resultStateButtonValue"
+            v-model="resultStateButtonValue1"
             active-text="通过"
             style="--el-switch-on-color: #13ce66"
             class="success"
           >
           </el-switch>
           <el-switch
-            v-model="resultStateButtonValue"
+            v-model="resultStateButtonValue2"
             active-text="失败"
             style="--el-switch-on-color: #fd3801"
             class="fail"
           >
           </el-switch>
           <el-switch
-            v-model="resultStateButtonValue"
+            v-model="resultStateButtonValue3"
             active-text="阻塞"
             style="--el-switch-on-color: #f69000"
             class="blocked"
           >
           </el-switch>
           <el-switch
-            v-model="resultStateButtonValue"
+            v-model="resultStateButtonValue4"
             active-text="跳过"
             style="--el-switch-on-color: #007af8"
             class="skip"

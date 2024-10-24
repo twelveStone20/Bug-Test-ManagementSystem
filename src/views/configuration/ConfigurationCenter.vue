@@ -2,7 +2,14 @@
 import { ref } from 'vue'
 import { TabsInstance } from 'element-plus'
 import { DrawerProps } from 'element-plus'
+import { useUserStore } from '@/stores'
+import { useTeamStore } from '@/stores/modules/team'
 const activeName = ref('teamConfig')
+
+const userStore = useUserStore()
+userStore.getUser()
+const teamStore = useTeamStore()
+teamStore.getTeam(userStore.user.userId)
 
 const handleClick = (tab, event) => {
   console.log(tab, event)
@@ -12,7 +19,7 @@ const selectedValue = ref('')
 const tabPosition = ref<TabsInstance['tabPosition']>('left')
 const tableData = [
   {
-    username: 'zihang001(团队创建者/负责人)'
+    username: teamStore.team.teamManager.username
   }
 ]
 const projectTableData = [
@@ -69,18 +76,23 @@ const direction = ref<DrawerProps['direction']>('rtl')
       <el-tab-pane label="团队配置" name="teamConfig">
         <div class="teamConfiguration">
           <el-form label-width="auto">
-            <el-form-item label="团队名称：">
+            <el-form-item label="我的团队：">
               <el-input
+                v-model="teamStore.team.teamName"
                 style="width: 200px"
-                placeholder="请填入团队名称"
                 show-word-limit
                 type="text"
+                disabled
               />
             </el-form-item>
             <el-form-item label="团队负责人：" style="width: 35%">
-              <el-select v-model="selectedValue" style="width: 50%">
-                <el-option label="zihang001" value="option1" />
-              </el-select>
+              <el-input
+                v-model="teamStore.team.teamManager.username"
+                style="width: 200px"
+                show-word-limit
+                type="text"
+                disabled
+              />
             </el-form-item>
           </el-form>
           <div class="teamPermission">
@@ -280,7 +292,7 @@ const direction = ref<DrawerProps['direction']>('rtl')
   </el-card>
 </template>
 
-<style>
+<style scoped>
 .configCard {
   min-height: 100%;
   box-sizing: border-box;
